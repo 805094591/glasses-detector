@@ -481,7 +481,7 @@ class GlassesSegmenter(BaseGlassesModel):
             format_fn = format
             format = lambda img, x: resize(
                 inpt=format_fn(x),
-                size=output_size if output_size else img.size,
+                size=(output_size or img.size)[::-1],
             ).squeeze(0)
 
         return super().predict(image, format, input_size)
